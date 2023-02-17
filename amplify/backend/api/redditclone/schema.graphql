@@ -14,19 +14,18 @@ type Post
   ) {
   id: ID!
   title: String!
-  blog: Blog @belongsTo
   comments: [Comment] @hasMany
 }
 
-type Comment 
-@model
-@auth(
+type Comment
+  @model
+  @auth(
     rules: [
       { allow: owner, operations: [create, update, delete, read] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
-  ) {{
+  ) {
   id: ID!
   post: Post @belongsTo
   content: String!
